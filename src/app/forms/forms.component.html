@@ -1,36 +1,35 @@
-<form >
+<form [formGroup]="mess" (ngSubmit)="onSubmit(form)" #form="ngForm" >
   <div style="display: inline-grid; margin:20px">
     <div class="input-field">
       <label for="topic">Temat:</label>
-      <input type="text" id="topic" class="validate" name="topic" pattern="[a-zA-Z ]*"
-        required>
+      <input type="text" formControlName="topic" id="topic" class="validate" name="topic">
     </div>
 
 
     <div class="input-field">
       <label for="message">Wiadomość:</label>
-      <textarea  type="text" name="message"  id="message" cols="50" class="materialize-textarea validate"
-        rows="10" data-length="20" maxlength="20"  minlenght="5" required></textarea>
+      <textarea  type="text" name="message" formControlName="message" id="message" cols="50" class="materialize-textarea validate"
+        rows="10" data-length="20" maxlength="20"  minlenght="5"></textarea>
     </div>
 
     <div class="input-field inline">
       <label for="email">e-mail:</label>
-      <input type="email" id="email"  class="validate" name="email"
-        data-error="Nie poprawy adres" data-success="Poprwany" email required>
+      <input type="email" id="email" formControlName="email" class="validate" name="email"
+        data-error="Nie poprawy adres" data-success="Poprwany">
     </div>
 
     <div class="input-field">
       <label for="nick">Nick:</label>
-      <input  type="text" id="nick" class="validate" name="nick" required>
+      <input  type="text" id="nick" formControlName="nick" class="validate" name="nick">
     </div>
 
     <label for="optionSelect" class="input-field ">Lubię:</label>
-    <select  id="optionSelect" name="optionSelect" class="browser-default" required>
-
+    <select  id="optionSelect" name="optionSelect" formControlName="optionSelect" class="browser-default">
+      <option *ngFor="let item of optionFramework" [value]="item">{{item}}</option>
     </select>
     <div>
 </div>
-    <button class="btn waves-effect waves-dark pink" [disabled]="!contact.valid" type="submit">Send</button>
+    <button class="btn waves-effect waves-dark pink" [disabled]="mess.invalid" type="submit">Send</button>
   </div>
 
   <div class="switch">
