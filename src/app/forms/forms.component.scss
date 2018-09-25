@@ -1,0 +1,91 @@
+.input-field label {
+  color: purple;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: purple;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid purple;
+  box-shadow: 0 1px 0 0 purple;
+}
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: 1px solid purple;
+  box-shadow: 0 1px 0 0 purple;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid rgb(255, 0, 0);
+  box-shadow: 0 1px 0 0 rgb(255, 0, 0);
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: purple;
+}
+.collection{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+  cursor: pointer;
+  border: none;
+  border-bottom:solid 2px;
+  border-bottom-color: purple;
+
+}
+.collection>:first-child{
+  font-weight: bold;
+  box-shadow: 10px 5px 10px 10p purple;
+}
+.collection>:nth-child(3){
+  box-shadow: 10px 5px 10px 10px purple;
+}
+
+/* label focus color */
+.input-field input[type=email]:focus + label {
+  color: purple;
+}
+/* label underline focus color */
+.input-field input[type=email]:focus {
+  border-bottom: 1px solid purple;
+  box-shadow: 0 1px 0 0 purple;
+}
+/* valid color */
+.input-field input[type=email].valid {
+  border-bottom: 1px solid purple;
+  box-shadow: 0 1px 0 0 purple;
+}
+/* invalid color */
+.input-field input[type=email].invalid {
+  border-bottom: 1px solid rgb(255, 0, 0);
+  box-shadow: 0 1px 0 0 rgb(255, 0, 0);
+}
+
+
+.input-field label {
+  color: purple;
+}
+/* label focus color */
+.input-field textarea[type=text]:focus + label {
+  color: purple;
+}
+/* label underline focus color */
+.input-field textarea[type=text]:focus {
+  border-bottom: 1px solid purple;
+  box-shadow: 0 1px 0 0 purple;
+}
+/* valid color */
+.input-field textarea[type=text].valid {
+  border-bottom: 1px solid purple;
+  box-shadow: 0 1px 0 0 purple;
+}
+/* invalid color */
+.input-field textarea[type=text].invalid {
+  border-bottom: 1px solid rgb(255, 0, 0);
+  box-shadow: 0 1px 0 0 rgb(255, 0, 0);
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: purple;
+}
