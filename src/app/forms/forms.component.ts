@@ -4,9 +4,11 @@ import {
   FormControl,
   Validators,
   NgForm,
-  FormArray
+  FormArray,
+  ValidationErrors,
+  AbstractControl
 } from '@angular/forms';
-import { WritePropExpr } from '@angular/compiler';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-forms',
@@ -16,35 +18,66 @@ import { WritePropExpr } from '@angular/compiler';
 export class FormsComponent implements OnInit {
   @ViewChild('form')
   form: NgForm;
+  comArray: Array<ReactiveMessage> = new Array<ReactiveMessage>();
   mess: FormGroup;
   messageReactive = new ReactiveMessage();
   optionFramework = ['Angular', 'React', 'JavaScript', 'Java', 'C#'];
   constructor() {}
 
   ngOnInit() {
-    this.mess = new FormGroup({
+    this.mess = this.initForms();
+  }
+  initForms() {
+    return new FormGroup({
       topic: new FormControl(null, Validators.required),
       message: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
       nick: new FormControl(null, Validators.required),
-      optionSelect: new FormControl(null, Validators.required), // this.optionFramework[0]
-      more: new FormArray([new FormControl(null), new FormControl(null)])
+      optionSelect: new FormControl(null, Validators.required),
+      more: new FormArray(
+        [new FormControl(null, [Validators.required])]
+        // [this.moreValidators, Validators.required]
+        // [new FormControl(null), new FormControl(null)],
+        // [this.moreValidators, Validators.required]
+      )
     });
+    // Show change in imput
+    // this.mess.valueChanges.subscribe(chenges => {
+    // console.log(chenges);
+    // });
   }
+
   onSubmit(a) {
-    console.log(this.mess);
-    console.log(a);
+    console.log(this.mess.value);
+    // this.mess.value.forEach(element => {
+    //  console.log(element);
+    //  // this.comArray.push(element);
+    // });
+    this.comArray.push(this.mess.value);
+    console.log(this.comArray);
+
+    // console.log(a);
     this.messageReactive.topic = this.mess.value.topic;
     this.messageReactive.message = this.mess.value.message;
     this.messageReactive.email = this.mess.value.email;
     this.messageReactive.nick = this.mess.value.nick;
     this.messageReactive.optionSelect = this.mess.value.optionSelect;
-    console.log(this.messageReactive);
-    // this.form.reset();
+    // console.log(this.messageReactive);
+    this.mess = this.initForms();
+    this.form.reset();
   }
   addmore() {
     const nextMore = <FormArray>this.mess.get('more');
-    nextMore.push(new FormControl(null));
+    nextMore.push(
+      new FormControl(null, [Validators.required])
+      // new FormControl(null, [Validators.required, this.moreValidators])
+    );
+  }
+  moreValidators(con: AbstractControl): ValidationErrors {
+    const arr = <[string]>con.value;
+    if (arr.includes('dom')) {
+      return { moreValid: 'true' };
+    }
   }
 }
 export class ReactiveMessage {

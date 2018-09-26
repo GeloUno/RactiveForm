@@ -1,4 +1,5 @@
 <form [formGroup]="mess" (ngSubmit)="onSubmit(form)" #form="ngForm">
+
   <div style="display: inline-grid; margin:20px">
     <div class="input-field">
       <label for="topic">Temat:</label>
@@ -37,40 +38,54 @@
     </div>
     <button class="btn waves-effect waves-dark pink" [disabled]="mess.invalid" type="submit">Send</button>
   </div>
-  <div style="display: inline-grid; margin:20px">
-   <div style="margin:20px">
-   <div class="switch" >
 
-      <label >
-        Off
-        <input type="checkbox">
-        <span class="lever"></span>
-        On
-      </label>
-     </div>
-     </div>
+  <div style="display: inline-grid; margin:20px;">
+    <div style="margin:20px">
+      <div class="switch">
 
-      <label>
-        <input class="with-gap" name="group1" type="radio" />
-        <span>Red</span>
-      </label> <label>
-        <input class="with-gap" name="group1" type="radio" />
-        <span>Blue</span>
-      </label> <label>
-        <input class="with-gap" name="group1" type="radio" />
-        <span>Green</span>
-      </label>
-<button class="btn waves-effect waves-dark pink" type="button" (click)="addmore()">Dodaj</button>
-      <div formArrayName="more">
-        <div *ngFor="let item of mess.get('more')['controls']; let i = index">
-          <div class="input-field">
-            <label for="i"> {{i+1}}. More: </label>
-            <input type="text" id="i" [formControlName]="i" class="validate" name="i">
-            <!-- <div *ngIf="!mess.get('nick').valid&&mess.get('nick').touched" class="red-text">* to pole należy wypełnić</div> -->
-          </div>
-
-        </div>
+        <label>
+          Off
+          <input type="checkbox">
+          <span class="lever"></span>
+          On
+        </label>
       </div>
     </div>
 
+    <label>
+      <input class="with-gap" name="group1" type="radio" />
+      <span>Red</span>
+    </label> <label>
+      <input class="with-gap" name="group1" type="radio" />
+      <span>Blue</span>
+    </label> <label>
+      <input class="with-gap" name="group1" type="radio" />
+      <span>Green</span>
+    </label>
+    <button class="btn waves-effect waves-dark pink" type="button" [disabled]="mess.invalid" (click)="addmore()">Dodaj</button>
+    <div formArrayName="more">
+      <div *ngFor="let item of mess.get('more')['controls']; let i = index">
+        <div class="input-field">
+          <label for="i"> {{i+1}}. More: </label>
+          <input type="text" id="i" [formControlName]="i" class="validate" name="i">
+          <!-- <div *ngIf="!mess.get('nick').valid&&mess.get('nick').touched" class="red-text">* to pole należy wypełnić</div> -->
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
 </form>
+
+<div style="display: inline-grid; margin:20px;">
+  <div *ngIf="comArray">
+    <div *ngFor="let item of comArray">
+     <div class="card" style="padding: 10px"> email: {{item['email']}}</div>
+     <div class="card" style="padding: 10px"> Wiadomość: {{item['message']}}</div>
+     <div class="card" style="padding: 10px"> Nick: {{item['nick']}}</div>
+     <div class="card" style="padding: 10px"> Lubię: {{item['optionSelect']}}</div>
+     <div class="card" style="padding: 10px"> Więcej: {{item['more']}}</div>
+    </div>
+  </div>
+</div>
