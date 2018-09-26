@@ -1,43 +1,76 @@
-<form [formGroup]="mess" (ngSubmit)="onSubmit(form)" #form="ngForm" >
+<form [formGroup]="mess" (ngSubmit)="onSubmit(form)" #form="ngForm">
   <div style="display: inline-grid; margin:20px">
     <div class="input-field">
       <label for="topic">Temat:</label>
       <input type="text" formControlName="topic" id="topic" class="validate" name="topic">
+      <div *ngIf="!mess.get('topic').valid&&mess.get('topic').touched" class="red-text">* to pole należy wypełnić</div>
     </div>
 
 
     <div class="input-field">
       <label for="message">Wiadomość:</label>
-      <textarea  type="text" name="message" formControlName="message" id="message" cols="50" class="materialize-textarea validate"
-        rows="10" data-length="20" maxlength="20"  minlenght="5"></textarea>
+      <textarea type="text" name="message" formControlName="message" id="message" cols="50" class="materialize-textarea validate"
+        rows="10" data-length="20" maxlength="20" minlenght="5"></textarea>
+      <div *ngIf="!mess.get('message').valid&&mess.get('message').touched" class="red-text">* to pole należy wypełnić</div>
     </div>
 
     <div class="input-field inline">
       <label for="email">e-mail:</label>
-      <input type="email" id="email" formControlName="email" class="validate" name="email"
-        data-error="Nie poprawy adres" data-success="Poprwany">
+      <input type="email" id="email" formControlName="email" class="validate" name="email" data-error="Nie poprawy adres"
+        data-success="Poprwany">
+      <div *ngIf="!mess.get('email').valid&&mess.get('email').touched" class="red-text">* to pole należy wypełnić</div>
     </div>
 
     <div class="input-field">
       <label for="nick">Nick:</label>
-      <input  type="text" id="nick" formControlName="nick" class="validate" name="nick">
+      <input type="text" id="nick" formControlName="nick" class="validate" name="nick">
+      <div *ngIf="!mess.get('nick').valid&&mess.get('nick').touched" class="red-text">* to pole należy wypełnić</div>
     </div>
 
     <label for="optionSelect" class="input-field ">Lubię:</label>
-    <select  id="optionSelect" name="optionSelect" formControlName="optionSelect" class="browser-default">
+    <select id="optionSelect" name="optionSelect" formControlName="optionSelect" class="browser-default">
+      <option value="null" disabled selected>Proszę wybrać</option>
       <option *ngFor="let item of optionFramework" [value]="item">{{item}}</option>
     </select>
     <div>
-</div>
+      <br />
+    </div>
     <button class="btn waves-effect waves-dark pink" [disabled]="mess.invalid" type="submit">Send</button>
   </div>
+  <div style="display: inline-grid; margin:20px">
+   <div style="margin:20px">
+   <div class="switch" >
 
-  <div class="switch">
-    <label>
-      Off
-      <input type="checkbox">
-      <span class="lever"></span>
-      On
-    </label>
-  </div>
+      <label >
+        Off
+        <input type="checkbox">
+        <span class="lever"></span>
+        On
+      </label>
+     </div>
+     </div>
+
+      <label>
+        <input class="with-gap" name="group1" type="radio" />
+        <span>Red</span>
+      </label> <label>
+        <input class="with-gap" name="group1" type="radio" />
+        <span>Blue</span>
+      </label> <label>
+        <input class="with-gap" name="group1" type="radio" />
+        <span>Green</span>
+      </label>
+<button class="btn waves-effect waves-dark pink" type="button" (click)="addmore()">Dodaj</button>
+      <div formArrayName="more">
+        <div *ngFor="let item of mess.get('more')['controls']; let i = index">
+          <div class="input-field">
+            <label for="i"> {{i+1}}. More: </label>
+            <input type="text" id="i" [formControlName]="i" class="validate" name="i">
+            <!-- <div *ngIf="!mess.get('nick').valid&&mess.get('nick').touched" class="red-text">* to pole należy wypełnić</div> -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+
 </form>
